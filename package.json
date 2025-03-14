@@ -13,8 +13,12 @@
   "dependencies": {
     "@strapi/plugin-cloud": "5.10.3",
     "@strapi/plugin-users-permissions": "5.10.3",
+    "@strapi/provider-email-nodemailer": "^5.11.2",
     "@strapi/strapi": "5.10.3",
     "better-sqlite3": "11.3.0",
+    "dotenv": "^16.4.7",
+    "gaxios": "^6.7.1",
+    "googleapis": "^146.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
