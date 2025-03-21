@@ -22,4 +22,9 @@ export default ({ env }) => ({
 			},
 		},
 	},
+  telegram: {
+    config: {
+      provider: ''
+    }
+  }
 });

@@ -17,8 +17,28 @@
     "subtitle": {
       "type": "string"
     },
+    "mission": {
+      "type": "string"
+    },
+    "teaser": {
+      "type": "blocks"
+    },
+    "summary": {
+      "type": "string"
+    },
     "content": {
       "type": "blocks"
+    },
+    "imgCaption": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "titleSmall": {
+      "type": "string"
     },
     "cover": {
       "type": "media",
@@ -30,6 +50,16 @@
         "videos",
         "audios"
       ]
+    },
+    "coverPreview": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

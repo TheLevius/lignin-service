@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "widgets",
+  "info": {
+    "singularName": "widget",
+    "pluralName": "widgets",
+    "displayName": "Widget"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "widgetOrder": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "article": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::article.article"
+    }
+  }
+}

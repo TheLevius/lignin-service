@@ -19,13 +19,17 @@
     "dotenv": "^16.4.7",
     "gaxios": "^6.7.1",
     "googleapis": "^146.0.0",
+    "node-telegram-bot-api": "^0.66.0",
+    "qrcode-terminal": "^0.12.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
-    "styled-components": "^6.0.0"
+    "styled-components": "^6.0.0",
+    "whatsapp-web.js": "^1.26.0"
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/node-telegram-bot-api": "^0.64.7",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "typescript": "^5"
@@ -36,5 +40,6 @@
   },
   "strapi": {
     "uuid": "d7c9ee32-81d9-431c-9880-3b854538f2ff"
-  }
+  },
+  "packageManager": "pnpm@10.6.3+sha512.bb45e34d50a9a76e858a95837301bfb6bd6d35aea2c5d52094fa497a467c43f5c440103ce2511e9e0a2f89c3d6071baac3358fc68ac6fb75e2ceb3d2736065e6"
 }

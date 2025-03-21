@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bigboards",
+  "info": {
+    "singularName": "bigboard",
+    "pluralName": "bigboards",
+    "displayName": "Bigboard",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "menuName": {
+      "type": "string"
+    },
+    "article": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::article.article"
+    },
+    "menuOrder": {
+      "type": "integer",
+      "unique": true,
+      "min": 1,
+      "max": 10
+    }
+  }
+}
