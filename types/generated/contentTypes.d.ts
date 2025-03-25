@@ -396,6 +396,8 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       'api::article.article'
     > &
       Schema.Attribute.Private;
+    metaDescription: Schema.Attribute.String;
+    metaKeywords: Schema.Attribute.String;
     mission: Schema.Attribute.String;
     path: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -425,6 +427,9 @@ export interface ApiBigboardBigboard extends Struct.CollectionTypeSchema {
   };
   attributes: {
     article: Schema.Attribute.Relation<'oneToOne', 'api::article.article'>;
+    background: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

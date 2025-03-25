@@ -24,6 +24,16 @@
       "unique": true,
       "min": 1,
       "max": 10
+    },
+    "background": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
