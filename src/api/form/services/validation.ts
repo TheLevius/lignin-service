@@ -1,68 +1,76 @@
-interface FormData {
+type FormData = {
 	email: string;
 	phone: string;
 	name: string;
 	message: string;
-}
+};
 
-interface ValidationResult {
-	isValid: boolean;
-	errorMessage?: string;
-}
+export type ValidationResult = {
+	errors: ErrorMessages;
+	errorFields: string[];
+};
+type ErrorMessages = {
+	email: string;
+	phone: string;
+	name: string;
+	message: string;
+};
 
 export default {
 	validateForm(data: FormData): ValidationResult {
-		const fields = ['email', 'phone', 'name', 'message'];
-		const emptyFields = fields.filter((field) => !data[field]);
-
-		if (emptyFields.length > 0) {
-			return {
-				isValid: false,
-				errorMessage: `Поля: ${emptyFields.join(', ')} не должны быть пустыми`,
-			};
+		const errorFields = [];
+		const errors: ErrorMessages = {
+			email: '',
+			phone: '',
+			name: '',
+			message: '',
+		};
+		const fields = Object.keys(data);
+		for (const field of fields) {
+			if (!data[field].length) {
+				errorFields.push(field);
+				errors[field] = 'Поле не может быть пустым';
+			}
 		}
 
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		if (!emailRegex.test(data.email)) {
-			return {
-				isValid: false,
-				errorMessage: 'Неверный формат email',
-			};
+		if (!errorFields.includes('email') && !emailRegex.test(data.email)) {
+			errorFields.push('email');
+			errors.email = 'Неверный формат email';
 		}
 
 		const phoneRegex = /^(?:\+7|8)\d{10}$/;
-		if (!phoneRegex.test(data.phone)) {
-			return {
-				isValid: false,
-				errorMessage:
-					'Неверный формат телефона. Используйте +7XXXXXXXXXX или 8XXXXXXXXXX (11 цифр)',
-			};
+		if (!errorFields.includes('phone') && !phoneRegex.test(data.phone)) {
+			errorFields.push('phone');
+			errors.phone =
+				'Неверный формат телефона. Используйте +7XXXXXXXXXX или 8XXXXXXXXXX (11 цифр)';
 		}
 
 		const nameSpaceCount = data.name.match(/ /g)?.length ?? 0;
-		if (nameSpaceCount > 2) {
-			return {
-				isValid: false,
-				errorMessage: 'Имя не может содержать больше двух пробелов',
-			};
+
+		if (!errorFields.includes('name') && nameSpaceCount > 2) {
+			errorFields.push('name');
+			errors.name = 'Имя не может содержать больше двух пробелов';
 		}
 
 		const nameRegex = /^[a-zA-Zа-яА-ЯёЁ\-\'\s]+$/;
-		if (!nameRegex.test(data.name)) {
-			return {
-				isValid: false,
-				errorMessage: 'Имя содержит недопустимые символы',
-			};
+		if (!errorFields.includes('name') && !nameRegex.test(data.name)) {
+			errorFields.push('name');
+			errors.name = 'Имя содержит недопустимые символы';
 		}
 
-		if (data.message.length < 5 || data.message.length > 1000) {
-			return {
-				isValid: false,
-				errorMessage:
-					'Сообщение не может содержать меньше 5 или больше 1000 символов',
-			};
+		if (
+			(!errorFields.includes('message') && data.message.length < 5) ||
+			data.message.length > 1000
+		) {
+			errorFields.push('message');
+			errors.message =
+				'Сообщение не может содержать меньше 5 или больше 1000 символов';
 		}
 
-		return { isValid: true };
+		return {
+			errors,
+			errorFields,
+		};
 	},
 };

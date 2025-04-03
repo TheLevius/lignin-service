@@ -1,15 +1,21 @@
 'use strict';
 
+import { ValidationResult } from '../services/validation';
+
 module.exports = {
 	async feedback(ctx) {
 		try {
 			const formData = ctx.request.body;
 
-			// Валидация данных формы
-			const validation =
+			const { errors, errorFields }: ValidationResult =
 				await strapi.services['api::form.validation'].validateForm(formData);
-			if (!validation.isValid) {
-				return ctx.badRequest(validation.errorMessage);
+			if (errorFields.length > 0) {
+				ctx.status = 400;
+				ctx.body = {
+					errors,
+					errorFields,
+				};
+				return;
 			}
 
 			// Отправка письма на почту (если раскомментировано)
@@ -20,9 +26,11 @@ module.exports = {
 				await strapi.services['api::form.telegram'].sendNotification(formData);
 			} catch (notificationError) {
 				console.error('Error sending notification:', notificationError);
-				return ctx.badRequest('Ошибка при отправке уведомления', {
-					error: notificationError.message,
-				});
+				// return ctx.badRequest('Ошибка при отправке уведомления', {
+				// 	error: notificationError.message,
+				// });
+				ctx.status === 424;
+				return;
 			}
 			// try {
 			// 	await strapi.services['api::form.whatsapp'].sendMessage(formData);
@@ -38,9 +46,11 @@ module.exports = {
 				data: formData,
 			});
 		} catch (error) {
-			return ctx.badRequest('Ошибка при отправке формы', {
-				error: error.message,
-			});
+			ctx.status = 424;
+			return;
+			// return ctx.badRequest('Ошибка при отправке формы', {
+			// 	error: error.message,
+			// });
 		}
 	},
 };
