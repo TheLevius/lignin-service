@@ -67,6 +67,16 @@
     },
     "metaKeywords": {
       "type": "string"
+    },
+    "coverBigboard": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

@@ -383,6 +383,9 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   attributes: {
     content: Schema.Attribute.Blocks;
     cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    coverBigboard: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     coverPreview: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
