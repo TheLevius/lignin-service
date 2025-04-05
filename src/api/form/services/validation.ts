@@ -39,11 +39,11 @@ export default {
 			errors.email = 'Неверный формат email';
 		}
 
-		const phoneRegex = /^(?:\+7|8)\d{10}$/;
+		const phoneRegex = /^\+\d{6,14}$/;
 		if (!errorFields.includes('phone') && !phoneRegex.test(data.phone)) {
 			errorFields.push('phone');
 			errors.phone =
-				'Неверный формат телефона. Используйте +7XXXXXXXXXX или 8XXXXXXXXXX (11 цифр)';
+				'Неверный формат телефона. Должен начинаться с + и содержать от 6 до 14 цифр';
 		}
 
 		const nameSpaceCount = data.name.match(/ /g)?.length ?? 0;
