@@ -3,28 +3,25 @@ export default ({ env }) => ({
 		config: {
 			provider: 'nodemailer',
 			providerOptions: {
-				host: 'smtp.gmail.com',
-				port: 587,
-				secure: false,
-				requireTLS: true,
-				ignoreTLS: false,
+				host: 'smtp.yandex.ru',
+				port: 465,
+				secure: true,
+				// requireTLS: true,
+				// ignoreTLS: false,
 				auth: {
-					type: 'OAuth2',
-					user: env('SMTP_USERNAME'),
-					clientId: env('SMTP_CLIENT_ID'),
-					clientSecret: env('SMTP_CLIENT_SECRET'),
-					refreshToken: env('SMTP_REFRESH_TOKEN'),
+					user: env('SMTP_AUTH_USER'),
+					pass: env('SMTP_AUTH_PASS'),
 				},
 			},
 			settings: {
-				defaultFrom: env('SMTP_USERNAME'),
-				defaultReplyTo: env('SMTP_USERNAME'),
+				defaultFrom: env('SMTP_AUTH_USER'),
+				defaultReplyTo: env('SMTP_AUTH_USER'),
 			},
 		},
 	},
-  telegram: {
-    config: {
-      provider: ''
-    }
-  }
+	telegram: {
+		config: {
+			provider: '',
+		},
+	},
 });
