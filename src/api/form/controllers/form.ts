@@ -19,13 +19,19 @@ module.exports = {
 			}
 
 			// Отправка письма на почту (если раскомментировано)
-			await strapi.plugins['email'].services.email.send({
-				to: 'alex.bizby@gmail.com',
-				from: 'ligninsorbent@gmail.com',
-				subject: 'Форма обратной связи',
-				text: `Имя: ${formData.name}\nТелефон: ${formData.phone}\nEmail: ${formData.email}\nСообщение: ${formData.message}`,
-				html: `<p>Имя: ${formData.name}</p><p>Телефон: ${formData.phone}</p><p>Email: ${formData.email}</p><p>Сообщение: ${formData.message}</p>`,
-			});
+			// try {
+			// 	await strapi.plugins['email'].services.email.send({
+			// 		to: 'alex.bizby@gmail.com',
+			// 		from: 'ligninsorbent@gmail.com',
+			// 		subject: 'Форма обратной связи',
+			// 		text: `Имя: ${formData.name}\nТелефон: ${formData.phone}\nEmail: ${formData.email}\nСообщение: ${formData.message}`,
+			// 		html: `<p>Имя: ${formData.name}</p><p>Телефон: ${formData.phone}</p><p>Email: ${formData.email}</p><p>Сообщение: ${formData.message}</p>`,
+			// 	});
+			// } catch (emailError) {
+			// 	console.error('Error sending emeail: ', emailError);
+			// 	ctx.status === 424;
+			// 	return;
+			// }
 
 			// Отправка уведомления в Telegram
 			try {
