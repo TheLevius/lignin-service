@@ -459,6 +459,35 @@ export interface ApiBigboardBigboard extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiExcludedArticleExcludedArticle
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'excluded_articles';
+  info: {
+    displayName: 'ExcludedArticle';
+    pluralName: 'excluded-articles';
+    singularName: 'excluded-article';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    article: Schema.Attribute.Relation<'oneToOne', 'api::article.article'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::excluded-article.excluded-article'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiWidgetWidget extends Struct.CollectionTypeSchema {
   collectionName: 'widgets';
   info: {
@@ -1006,6 +1035,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::article.article': ApiArticleArticle;
       'api::bigboard.bigboard': ApiBigboardBigboard;
+      'api::excluded-article.excluded-article': ApiExcludedArticleExcludedArticle;
       'api::widget.widget': ApiWidgetWidget;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

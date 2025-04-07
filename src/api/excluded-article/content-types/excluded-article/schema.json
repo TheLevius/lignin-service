@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "excluded_articles",
+  "info": {
+    "singularName": "excluded-article",
+    "pluralName": "excluded-articles",
+    "displayName": "ExcludedArticle"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "article": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::article.article"
+    }
+  }
+}
