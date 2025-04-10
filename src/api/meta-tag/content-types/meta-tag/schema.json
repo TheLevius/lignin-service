@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "meta_tags",
+  "info": {
+    "singularName": "meta-tag",
+    "pluralName": "meta-tags",
+    "displayName": "Meta Tag"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "keywords": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "ogTitle": {
+      "type": "string"
+    },
+    "ogDescription": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

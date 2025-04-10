@@ -516,6 +516,39 @@ export interface ApiExcludedArticleExcludedArticle
   };
 }
 
+export interface ApiMetaTagMetaTag extends Struct.CollectionTypeSchema {
+  collectionName: 'meta_tags';
+  info: {
+    displayName: 'Meta Tag';
+    pluralName: 'meta-tags';
+    singularName: 'meta-tag';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String;
+    keywords: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::meta-tag.meta-tag'
+    > &
+      Schema.Attribute.Private;
+    ogDescription: Schema.Attribute.String;
+    ogTitle: Schema.Attribute.String;
+    path: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiWidgetWidget extends Struct.CollectionTypeSchema {
   collectionName: 'widgets';
   info: {
@@ -1065,6 +1098,7 @@ declare module '@strapi/strapi' {
       'api::article.article': ApiArticleArticle;
       'api::bigboard.bigboard': ApiBigboardBigboard;
       'api::excluded-article.excluded-article': ApiExcludedArticleExcludedArticle;
+      'api::meta-tag.meta-tag': ApiMetaTagMetaTag;
       'api::widget.widget': ApiWidgetWidget;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
