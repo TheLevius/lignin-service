@@ -1,0 +1,27 @@
+{
+  "kind": "singleType",
+  "collectionName": "hero_contents",
+  "info": {
+    "singularName": "hero-content",
+    "pluralName": "hero-contents",
+    "displayName": "Hero Content"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "content": {
+      "type": "blocks"
+    },
+    "background": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

@@ -516,6 +516,37 @@ export interface ApiExcludedArticleExcludedArticle
   };
 }
 
+export interface ApiHeroContentHeroContent extends Struct.SingleTypeSchema {
+  collectionName: 'hero_contents';
+  info: {
+    displayName: 'Hero Content';
+    pluralName: 'hero-contents';
+    singularName: 'hero-content';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    background: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    content: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::hero-content.hero-content'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiMetaTagMetaTag extends Struct.CollectionTypeSchema {
   collectionName: 'meta_tags';
   info: {
@@ -1098,6 +1129,7 @@ declare module '@strapi/strapi' {
       'api::article.article': ApiArticleArticle;
       'api::bigboard.bigboard': ApiBigboardBigboard;
       'api::excluded-article.excluded-article': ApiExcludedArticleExcludedArticle;
+      'api::hero-content.hero-content': ApiHeroContentHeroContent;
       'api::meta-tag.meta-tag': ApiMetaTagMetaTag;
       'api::widget.widget': ApiWidgetWidget;
       'plugin::content-releases.release': PluginContentReleasesRelease;
