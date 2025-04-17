@@ -30,4 +30,7 @@ export default ({ env }) => ({
 			mimeTypes: ['image/png', 'image/jpeg', 'image/jpg'],
 		},
 	},
+	seo: {
+		enabled: true,
+	},
 });
