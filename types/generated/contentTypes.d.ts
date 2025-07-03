@@ -372,6 +372,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiAboutUsAboutUs extends Struct.SingleTypeSchema {
   collectionName: 'about_uses';
   info: {
+    description: '';
     displayName: 'About Us';
     pluralName: 'about-uses';
     singularName: 'about-us';
@@ -411,9 +412,6 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   attributes: {
     content: Schema.Attribute.Blocks;
     cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    coverBigboard: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
     coverPreview: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
@@ -434,11 +432,42 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', true>;
     subtitle: Schema.Attribute.String;
     summary: Schema.Attribute.String;
     teaser: Schema.Attribute.Blocks;
     title: Schema.Attribute.String;
     titleSmall: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiArticlesPageArticlesPage extends Struct.SingleTypeSchema {
+  collectionName: 'articles_pages';
+  info: {
+    description: '';
+    displayName: 'Articles Page';
+    pluralName: 'articles-pages';
+    singularName: 'articles-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::articles-page.articles-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -461,6 +490,7 @@ export interface ApiBigboardBigboard extends Struct.CollectionTypeSchema {
     background: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
+    cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -516,9 +546,45 @@ export interface ApiExcludedArticleExcludedArticle
   };
 }
 
+export interface ApiFeedbackFormFeedbackForm extends Struct.SingleTypeSchema {
+  collectionName: 'feedback_forms';
+  info: {
+    description: '';
+    displayName: 'Feedback Form';
+    pluralName: 'feedback-forms';
+    singularName: 'feedback-form';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    backgroundDesktop: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    backgroundMobile: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::feedback-form.feedback-form'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiHeroContentHeroContent extends Struct.SingleTypeSchema {
   collectionName: 'hero_contents';
   info: {
+    description: '';
     displayName: 'Hero Content';
     pluralName: 'hero-contents';
     singularName: 'hero-content';
@@ -528,7 +594,8 @@ export interface ApiHeroContentHeroContent extends Struct.SingleTypeSchema {
   };
   attributes: {
     background: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
+      'images' | 'files' | 'videos' | 'audios',
+      true
     >;
     content: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
@@ -541,6 +608,7 @@ export interface ApiHeroContentHeroContent extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -580,9 +648,43 @@ export interface ApiMetaTagMetaTag extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiSitemapPageSitemapPage extends Struct.SingleTypeSchema {
+  collectionName: 'sitemap_pages';
+  info: {
+    description: '';
+    displayName: 'Sitemap Page';
+    pluralName: 'sitemap-pages';
+    singularName: 'sitemap-page';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sitemap-page.sitemap-page'
+    > &
+      Schema.Attribute.Private;
+    path: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiWidgetWidget extends Struct.CollectionTypeSchema {
   collectionName: 'widgets';
   info: {
+    description: '';
     displayName: 'Widget';
     pluralName: 'widgets';
     singularName: 'widget';
@@ -602,6 +704,7 @@ export interface ApiWidgetWidget extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1127,10 +1230,13 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::about-us.about-us': ApiAboutUsAboutUs;
       'api::article.article': ApiArticleArticle;
+      'api::articles-page.articles-page': ApiArticlesPageArticlesPage;
       'api::bigboard.bigboard': ApiBigboardBigboard;
       'api::excluded-article.excluded-article': ApiExcludedArticleExcludedArticle;
+      'api::feedback-form.feedback-form': ApiFeedbackFormFeedbackForm;
       'api::hero-content.hero-content': ApiHeroContentHeroContent;
       'api::meta-tag.meta-tag': ApiMetaTagMetaTag;
+      'api::sitemap-page.sitemap-page': ApiSitemapPageSitemapPage;
       'api::widget.widget': ApiWidgetWidget;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

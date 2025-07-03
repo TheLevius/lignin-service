@@ -4,7 +4,8 @@
   "info": {
     "singularName": "hero-content",
     "pluralName": "hero-contents",
-    "displayName": "Hero Content"
+    "displayName": "Hero Content",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -14,14 +15,20 @@
       "type": "blocks"
     },
     "background": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
     }
   }
 }

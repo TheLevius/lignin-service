@@ -4,7 +4,8 @@
   "info": {
     "singularName": "widget",
     "pluralName": "widgets",
-    "displayName": "Widget"
+    "displayName": "Widget",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,6 +20,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::article.article"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.seo"
     }
   }
 }

@@ -1,0 +1,39 @@
+{
+  "kind": "singleType",
+  "collectionName": "feedback_forms",
+  "info": {
+    "singularName": "feedback-form",
+    "pluralName": "feedback-forms",
+    "displayName": "Feedback Form",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "backgroundDesktop": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "backgroundMobile": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
